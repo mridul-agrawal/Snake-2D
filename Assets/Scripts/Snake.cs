@@ -35,6 +35,7 @@ public class Snake : MonoBehaviour
     public float gridMoveTimermax;
     private float gridMoveTimer;
     private LevelGrid levelGrid;
+    public CanvasManager canvasManager;
 
 
     public void Setup(LevelGrid lg)
@@ -197,6 +198,7 @@ public class Snake : MonoBehaviour
                 Score++;
             }
             Score++;
+            canvasManager.ResetScore(Score);
             snakeBodySize++;
             CreateSnakeBodyPart();
         }
@@ -209,6 +211,7 @@ public class Snake : MonoBehaviour
                 return;
             }
             Score--;
+            canvasManager.ResetScore(Score);
             snakeBodySize--;
             DestroySnakeBodyPart();
         }
@@ -274,8 +277,8 @@ public class Snake : MonoBehaviour
     {
         if(ShieldActive) { return; }
 
-        alive = false; 
-        Debug.Log("Game Over");
+        alive = false;
+        canvasManager.EnableDeathUI();
     }
 
     public Vector2Int GetGridPosition()
