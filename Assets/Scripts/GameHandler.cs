@@ -13,7 +13,8 @@ public class GameHandler : MonoBehaviour
         snakeInstance.Setup(levelGridInstance);
         levelGridInstance.Setup(snakeInstance);
 
-        levelGridInstance.SpawnFood();
+        levelGridInstance.SpawnMassGainer();
+        levelGridInstance.SpawnMassBurner();
     }
 
 }

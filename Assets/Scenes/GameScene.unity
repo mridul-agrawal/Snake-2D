@@ -264,8 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4819687b23acda94d9e545aeb334aca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gridMoveTimermax: 0.1
   snakeBodySize: 0
+  gridMoveTimermax: 0.1
 --- !u!1 &519216308
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +311,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   snakeHeadSprite: {fileID: 311877200404418454, guid: 367a7002b444d7142a083dd158a03ca6, type: 3}
   snakeBodySprite: {fileID: 7054319433691585636, guid: d9359e59f03047f419779ec4bca77a66, type: 3}
-  foodSprite: {fileID: 21300000, guid: c2f037675386eb2498d76795f7d03291, type: 3}
+  massGainerSprite: {fileID: 21300000, guid: c2f037675386eb2498d76795f7d03291, type: 3}
+  massBurnerSprite: {fileID: 5296329600245887545, guid: d35794453cba4e0409653d084cbe9f08, type: 3}
+  shieldSprite: {fileID: 6661608437100938090, guid: d35794453cba4e0409653d084cbe9f08, type: 3}
 --- !u!1 &663326603
 GameObject:
   m_ObjectHideFlags: 0

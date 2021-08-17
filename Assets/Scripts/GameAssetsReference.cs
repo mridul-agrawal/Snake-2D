@@ -8,26 +8,15 @@ public class GameAssetsReference : MonoBehaviour
 
     public Sprite snakeHeadSprite;
     public Sprite snakeBodySprite;
-    public Sprite foodSprite;
+    public Sprite massGainerSprite;
+    public Sprite massBurnerSprite;
+    public Sprite shieldSprite;
 
     private void Awake()
     {
         Instance = this;
     }
 
- /*   void Start()
-    {
-        if (Instance = null)
-        {
-            Instance = this;
-        } else
-        {
-            Destroy(gameObject);
-        }
-
-        Debug.Log(snakeHeadSprite.texture);
-    }
- */
 
 
 }
