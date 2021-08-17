@@ -11,6 +11,8 @@ public class GameAssetsReference : MonoBehaviour
     public Sprite massGainerSprite;
     public Sprite massBurnerSprite;
     public Sprite shieldSprite;
+    public Sprite speedUpSprite;
+    public Sprite scoreBoostSprite;
 
     private void Awake()
     {

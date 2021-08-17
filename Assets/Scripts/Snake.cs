@@ -14,6 +14,10 @@ public class Snake : MonoBehaviour
 
     private bool alive;
     private bool ShieldActive;
+    private bool speedUpActive;
+    private bool scoreBoostActive;
+    public int Score;
+
     private Direction gridMoveDirection;
     private Vector2Int gridPosition;
     private Vector3 snakeHeadRotation;
@@ -51,11 +55,14 @@ public class Snake : MonoBehaviour
         snakeBodyPartList = new List<SnakeBodyPart>();
         alive = true;
         ShieldActive = false;
+        speedUpActive = false;
+        scoreBoostActive = false;
         DelayPowerUpTimerMax = 10f;
         DelayPowerUpTimer = DelayPowerUpTimerMax;
         powerUpTimerMax = 5f;
         powerUpTimer = powerUpTimerMax;
         powerUpPresent = false;
+        Score = 0;
     }
 
     private void Update()
@@ -107,6 +114,8 @@ public class Snake : MonoBehaviour
 
     public void HandleGridMovement()
     {
+        if(speedUpActive) { gridMoveTimermax = 0.05f; } else { gridMoveTimermax = 0.1f; }
+
         HandlePowerUps();
 
         gridMoveTimer += Time.deltaTime;
@@ -183,6 +192,11 @@ public class Snake : MonoBehaviour
     {
         if (levelGrid.HasEatenFood(gridPosition))
         {
+            if(scoreBoostActive)
+            {
+                Score++;
+            }
+            Score++;
             snakeBodySize++;
             CreateSnakeBodyPart();
         }
@@ -194,6 +208,7 @@ public class Snake : MonoBehaviour
                 GameOver();
                 return;
             }
+            Score--;
             snakeBodySize--;
             DestroySnakeBodyPart();
         }
@@ -203,6 +218,20 @@ public class Snake : MonoBehaviour
             powerUpPresent = false;
             powerUpTimer = powerUpTimerMax;
             StartCoroutine(ActivateShield());
+        }
+
+        if(levelGrid.HasEatenSpeedUp(gridPosition))
+        {
+            powerUpPresent = false;
+            powerUpTimer = powerUpTimerMax;
+            StartCoroutine(ActivateSpeedUp());
+        }
+
+        if(levelGrid.HasEatenScoreBoost(gridPosition))
+        {
+            powerUpPresent = false;
+            powerUpTimer = powerUpTimerMax;
+            StartCoroutine(ActivateScoreBoost());
         }
     }
 
@@ -379,6 +408,20 @@ public class Snake : MonoBehaviour
         ShieldActive = true;
         yield return new WaitForSeconds(powerUpCoolDownTimer);
         ShieldActive = false;
+    }
+
+    IEnumerator ActivateSpeedUp()
+    {
+        speedUpActive = true;
+        yield return new WaitForSeconds(powerUpCoolDownTimer);
+        speedUpActive = false;
+    }
+
+    IEnumerator ActivateScoreBoost()
+    {
+        scoreBoostActive = true;
+        yield return new WaitForSeconds(powerUpCoolDownTimer);
+        scoreBoostActive = false;
     }
 
     private void SpawnPowerUps()

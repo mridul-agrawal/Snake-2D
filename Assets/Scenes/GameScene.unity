@@ -264,6 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4819687b23acda94d9e545aeb334aca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Score: 0
   snakeBodySize: 0
   powerUpCoolDownTimer: 5
   DelayPowerUpTimerMax: 0
@@ -318,6 +319,8 @@ MonoBehaviour:
   massGainerSprite: {fileID: 21300000, guid: c2f037675386eb2498d76795f7d03291, type: 3}
   massBurnerSprite: {fileID: 5296329600245887545, guid: d35794453cba4e0409653d084cbe9f08, type: 3}
   shieldSprite: {fileID: 6661608437100938090, guid: d35794453cba4e0409653d084cbe9f08, type: 3}
+  speedUpSprite: {fileID: 4305994991004020901, guid: d35794453cba4e0409653d084cbe9f08, type: 3}
+  scoreBoostSprite: {fileID: -3719532879094310982, guid: d35794453cba4e0409653d084cbe9f08, type: 3}
 --- !u!1 &663326603
 GameObject:
   m_ObjectHideFlags: 0
