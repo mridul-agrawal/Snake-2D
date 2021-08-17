@@ -265,6 +265,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snakeBodySize: 0
+  powerUpCoolDownTimer: 5
+  DelayPowerUpTimerMax: 0
+  DelayPowerUpTimer: 0
+  powerUpTimerMax: 0
   gridMoveTimermax: 0.1
 --- !u!1 &519216308
 GameObject:

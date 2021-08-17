@@ -21,6 +21,10 @@ public class Snake : MonoBehaviour
     private List<SnakeMovePosition> snakeMovePositionList;
     private List<SnakeBodyPart> snakeBodyPartList;
 
+    private bool powerUpPresent;
+    public float powerUpCoolDownTimer;
+    public float DelayPowerUpTimerMax;
+    public float DelayPowerUpTimer;
     private float powerUpTimer;
     public float powerUpTimerMax;
 
@@ -47,8 +51,11 @@ public class Snake : MonoBehaviour
         snakeBodyPartList = new List<SnakeBodyPart>();
         alive = true;
         ShieldActive = false;
-        powerUpTimerMax = 10f;
+        DelayPowerUpTimerMax = 10f;
+        DelayPowerUpTimer = DelayPowerUpTimerMax;
+        powerUpTimerMax = 5f;
         powerUpTimer = powerUpTimerMax;
+        powerUpPresent = false;
     }
 
     private void Update()
@@ -100,14 +107,7 @@ public class Snake : MonoBehaviour
 
     public void HandleGridMovement()
     {
-        powerUpTimer -= Time.deltaTime;
-
-        if (powerUpTimer <= 0)
-        {
-            powerUpTimer = powerUpTimerMax;
-            DestroyPowerUps();
-            SpawnPowerUps();
-        }
+        HandlePowerUps();
 
         gridMoveTimer += Time.deltaTime;
         if (gridMoveTimer >= gridMoveTimermax)
@@ -122,8 +122,31 @@ public class Snake : MonoBehaviour
             UpdateSnakeBodyParts();
             CheckIfDead();
 
+        }
+    }
 
+    private void HandlePowerUps()
+    {
+        if (!powerUpPresent)
+        {
+            DelayPowerUpTimer -= Time.deltaTime;
+            if (DelayPowerUpTimer <= 0)
+            {
+                SpawnPowerUps();
+                DelayPowerUpTimer = DelayPowerUpTimerMax;
+                powerUpPresent = true;
+            }
+        }
+        else
+        {
+            powerUpTimer -= Time.deltaTime;
 
+            if (powerUpTimer <= 0)
+            {
+                DestroyPowerUps();
+                powerUpPresent = false;
+                powerUpTimer = powerUpTimerMax;
+            }
         }
     }
 
@@ -177,6 +200,8 @@ public class Snake : MonoBehaviour
 
         if (levelGrid.HasEatenShield(gridPosition))
         {
+            powerUpPresent = false;
+            powerUpTimer = powerUpTimerMax;
             StartCoroutine(ActivateShield());
         }
     }
@@ -352,13 +377,13 @@ public class Snake : MonoBehaviour
     IEnumerator ActivateShield()
     {
         ShieldActive = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(powerUpCoolDownTimer);
         ShieldActive = false;
     }
 
     private void SpawnPowerUps()
     {
-        levelGrid.SpawnShield();
+        levelGrid.SpawnRandomPowerUps();
     }
 
     private void DestroyPowerUps()

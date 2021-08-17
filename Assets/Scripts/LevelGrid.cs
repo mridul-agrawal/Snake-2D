@@ -118,6 +118,11 @@ public class LevelGrid
         Object.Destroy(Shield);
     }
 
+    public void SpawnRandomPowerUps()
+    {
+        SpawnShield();
+    }
+
     public Vector2Int ValidateGridPosition(Vector2Int gridPosition)
     {
         if(gridPosition.x < 0)
